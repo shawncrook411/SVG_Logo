@@ -29,9 +29,24 @@ inquirer
             message: 'What color would you like your background to be? (color keyword or #hexadecimal number is valid)',
         }])
     .then((res) => {
-        data = res
+        let {text, shape, color} = inquirer
+        switch(shape)
+        {
+            case "triangle":
+                logo = new shapes.triangle(color, text)
+                logo.render()
+            break
 
-        shapes;
+            case "square":
+                logo = new shapes.square()
+                logo.render()
+            break
+
+            case "circle":
+                logo = new shapes.circle()
+                logo.render()
+            break
+        }
     })
     .catch((error) => console.log(error))
 }
