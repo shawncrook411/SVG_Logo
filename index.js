@@ -1,6 +1,10 @@
 const inquirer = require('inquirer')
+const shapes = require('./lib/shapes.js')
+const fs = require('fs');
 
 let data;
+
+
 
 init = function() {
 inquirer
@@ -26,6 +30,8 @@ inquirer
         }])
     .then((res) => {
         data = res
+
+        shapes;
     })
     .catch((error) => console.log(error))
 }
