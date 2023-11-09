@@ -1,10 +1,5 @@
 const inquirer = require('inquirer')
 const shapes = require('./lib/shapes.js')
-const fs = require('fs');
-
-let data;
-
-
 
 init = function() {
 inquirer
@@ -29,7 +24,10 @@ inquirer
             message: 'What color would you like your background to be? (color keyword or #hexadecimal number is valid)',
         }])
     .then((res) => {
-        let {text, shape, color} = inquirer
+        let {text, shape, color} = res
+
+        if (text.length != 3) throw new Error("Must enter 3 characters exactly")
+
         switch(shape)
         {
             case "triangle":
@@ -38,12 +36,12 @@ inquirer
             break
 
             case "square":
-                logo = new shapes.square()
+                logo = new shapes.square(color, text)
                 logo.render()
             break
 
             case "circle":
-                logo = new shapes.circle()
+                logo = new shapes.circle(color, text)
                 logo.render()
             break
         }
