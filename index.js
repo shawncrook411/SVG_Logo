@@ -2,6 +2,7 @@ const inquirer = require('inquirer')
 const shapes = require('./lib/shapes.js')
 
 init = function() {
+    //Prompts the user 3 questions: shape, color and string to be displayed?
 inquirer
     .prompt([
         {
@@ -24,31 +25,35 @@ inquirer
             message: 'What color would you like your background to be? (color keyword or #hexadecimal number is valid)',
         }])
     .then((res) => {
+
         let {text, shape, color} = res
 
+        //If the text is too long, will throw error and won't generate
         if (text.length != 3) throw new Error("Must enter 3 characters exactly")
 
+        //Generates new shape depending on the inquirer prompts. Then renders it
+        let logo;
         switch(shape)
         {
             case "triangle":
                 logo = new shapes.triangle(color, text)
-                logo.render()
             break
 
             case "square":
                 logo = new shapes.square(color, text)
-                logo.render()
             break
 
             case "circle":
                 logo = new shapes.circle(color, text)
-                logo.render()
             break
+
         }
+        logo.render()
     })
     .catch((error) => console.log(error))
 }
 
+//Main function call
 init()
 
 
